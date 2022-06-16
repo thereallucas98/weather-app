@@ -4,10 +4,9 @@ import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../../global/styles/theme";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-const Container = styled.SafeAreaView`
+const Container = styled.View`
   flex: 1;
-  padding: 20px;
-
+  padding: 32px 10px;
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
@@ -60,9 +59,9 @@ const SearchInput = styled.TextInput`
 
 const WeatherCardWrapper = styled.View`
   width: 100%;
-  height: 160px;
+  height: 200px;
 
-  padding: 10px;
+  padding: 32px;
   margin-top: 32px;
 
   border-radius: 10px;
@@ -73,7 +72,17 @@ const WeatherCardWrapper = styled.View`
   justify-content: space-between;
 `;
 
+
+const WeatherImageContent = styled.View``;
+
 const WeatherImageStatus = styled(MaterialCommunityIcons)``;
+
+const WeatherImageDescription = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: "Roboto_700Bold";
+  color: ${({ theme }) => theme.colors.shape};
+  text-align: center;
+`;
 
 const WeatherLocationContent = styled.View``;
 
@@ -99,7 +108,7 @@ const LocationCity = styled.Text`
 `;
 
 const LocationCountry = styled.Text`
-  margin-left: 2px;
+  margin-left: 1px;
   font-size: ${RFValue(14)}px;
   font-family: "Roboto_400Regular";
   color: ${({ theme }) => theme.colors.shape};
@@ -114,7 +123,9 @@ export {
   SearchIcon,
   SearchInput,
   WeatherCardWrapper,
+  WeatherImageContent,
   WeatherImageStatus,
+  WeatherImageDescription,
   WeatherLocationContent,
   TemperatureValue,
   LocationIcon,
