@@ -1,5 +1,5 @@
 
-interface WeatherParamsType {
+export interface WeatherParamsType {
   feels_like: number;
   humidity: number;
   pressure: number;
@@ -22,7 +22,7 @@ interface WeatherType {
   main: string;
 }
 
-interface WeatherWindType {
+export interface WeatherWindType {
   deg: number;
   speed: number;
 }

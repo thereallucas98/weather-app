@@ -1,5 +1,8 @@
 import { LocationType } from "../../models/weather.model";
 import { formatTimestampToHour } from "../../utils/formatTimestampToHour";
+import { TemperatureCard } from "./TemperatureCard";
+import { WindSunCard } from "./WindSunCard";
+
 import * as WeatherCardUI from "./styles";
 
 interface WeatherCardProps {
@@ -43,87 +46,8 @@ function WeatherCard({ data }: WeatherCardProps) {
         </WeatherCardUI.WeatherLocationContent>
       </WeatherCardUI.WeatherCardWrapper>
 
-      <WeatherCardUI.InfoDetailsWrapper>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Sensação
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailCardValue>
-            {data.main.feels_like}°C
-          </WeatherCardUI.InfoDetailCardValue>
-        </WeatherCardUI.InfoDetailCard>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Máxima
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailContentBox>
-            <WeatherCardUI.InfoDetailCardFontAwesomeIcon
-              name="temperature-high"
-              color="#FFF"
-              size={20}
-            />
-            <WeatherCardUI.InfoDetailCardValue>
-              {data.main.temp_max}
-            </WeatherCardUI.InfoDetailCardValue>
-          </WeatherCardUI.InfoDetailContentBox>
-        </WeatherCardUI.InfoDetailCard>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Mínima
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailContentBox>
-            <WeatherCardUI.InfoDetailCardFontAwesomeIcon
-              name="temperature-low"
-              color="#FFF"
-              size={20}
-            />
-            <WeatherCardUI.InfoDetailCardValue>
-              {data.main.temp_min}
-            </WeatherCardUI.InfoDetailCardValue>
-          </WeatherCardUI.InfoDetailContentBox>
-        </WeatherCardUI.InfoDetailCard>
-      </WeatherCardUI.InfoDetailsWrapper>
-
-      <WeatherCardUI.InfoDetailsWrapper>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Vento
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailCardValue>
-            {data.wind.deg} / {data.wind.speed}
-          </WeatherCardUI.InfoDetailCardValue>
-        </WeatherCardUI.InfoDetailCard>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Sunrise
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailContentBox>
-            <WeatherCardUI.InfoDetailCardMaterialCommunityIcon
-              name="weather-sunset-up"
-              color="#FFF"
-              size={20}
-            />
-            <WeatherCardUI.InfoDetailCardValue>
-              {sunRise}
-            </WeatherCardUI.InfoDetailCardValue>
-          </WeatherCardUI.InfoDetailContentBox>
-        </WeatherCardUI.InfoDetailCard>
-        <WeatherCardUI.InfoDetailCard>
-          <WeatherCardUI.InfoDetailCardTitle>
-            Sunset
-          </WeatherCardUI.InfoDetailCardTitle>
-          <WeatherCardUI.InfoDetailContentBox>
-            <WeatherCardUI.InfoDetailCardMaterialCommunityIcon
-              name="weather-sunset-down"
-              color="#FFF"
-              size={20}
-            />
-            <WeatherCardUI.InfoDetailCardValue>
-              {sunSet}
-            </WeatherCardUI.InfoDetailCardValue>
-          </WeatherCardUI.InfoDetailContentBox>
-        </WeatherCardUI.InfoDetailCard>
-      </WeatherCardUI.InfoDetailsWrapper>
+      <TemperatureCard data={data.main} />
+      <WindSunCard data={data.wind} sunRise={sunRise} sunSet={sunSet} />
     </WeatherCardUI.Container>
   );
 }
