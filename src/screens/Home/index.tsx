@@ -37,14 +37,6 @@ function Home() {
       const response = await api.get(
         `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
       );
-      console.log("================================");
-      console.log("response", response.data);
-      // console.log("main", response.data.main);
-      // console.log("name", response.data.name);
-      // console.log("sys", response.data.sys);
-      // console.log("weather", response.data.weather);
-      // console.log("windy", response.data.wind);
-      console.log("================================");
 
       const formatedData: LocationType = {
         main: {

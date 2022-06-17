@@ -10,6 +10,11 @@ const iconsResume = [
     label: "Poucas nuvens",
   },
   {
+    code: "02n",
+    name: "weather-sunny",
+    label: "Ensolarado",
+  },
+  {
     code: "03d",
     name: "weather-cloudy",
     label: "Parcialmente nublado",
@@ -52,7 +57,7 @@ export function whichIconShouldIUSeForMainCard(code: string) {
   const iconFormatted = {
     name: icon.name,
     label: icon.label,
-  }
+  };
 
   return iconFormatted;
 }

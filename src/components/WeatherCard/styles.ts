@@ -13,7 +13,7 @@ const Container = styled.View`
 
 const WeatherCardWrapper = styled.View`
   width: 100%;
-  height: 160px;
+  /* height: 140px; */
 
   padding: 10px;
   margin-top: 32px;
@@ -31,7 +31,7 @@ const WeatherImageContent = styled.View``;
 const WeatherImageStatus = styled(MaterialCommunityIcons)``;
 
 const WeatherImageDescription = styled.Text`
-  font-size: ${RFValue(16)}px;
+  font-size: ${RFValue(14)}px;
   font-family: "Roboto_700Bold";
   color: ${({ theme }) => theme.colors.shape};
   text-align: center;
@@ -40,7 +40,7 @@ const WeatherImageDescription = styled.Text`
 const WeatherLocationContent = styled.View``;
 
 const TemperatureValue = styled.Text`
-  font-size: ${RFValue(42)}px;
+  font-size: ${RFValue(14)}px;
   font-family: "Roboto_700Bold";
   color: ${({ theme }) => theme.colors.shape};
 `;

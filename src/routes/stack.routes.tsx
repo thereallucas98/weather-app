@@ -12,7 +12,7 @@ const StackRoutes = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <Navigator screenOptions={{ headerShown: false }}>
-          <Screen name="Home" component={TabRoutes} />
+          <Screen name="Dashboard" component={TabRoutes} />
         </Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
