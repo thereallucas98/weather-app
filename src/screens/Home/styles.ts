@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
 import Feather from "@expo/vector-icons/Feather";
-import { RFValue } from "react-native-responsive-fontsize";
-import theme from "../../global/styles/theme";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { RFValue } from "react-native-responsive-fontsize";
 
-const Container = styled.View`
+import theme from "../../global/styles/theme";
+
+const Container = styled.SafeAreaView`
   flex: 1;
   padding: 32px 10px;
   background-color: ${({ theme }) => theme.colors.background};
@@ -12,7 +13,7 @@ const Container = styled.View`
 
 const Header = styled.View`
   height: 100px;
-  padding: 10px;
+  padding: 0 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -42,7 +43,7 @@ const SearchWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background_light};
   padding: 10px;
   border-radius: 8px;
-  margin-top: 32px;
+  margin-top: 8px;
   margin-bottom: 12px;
   flex-direction: row;
 `;

@@ -7,7 +7,8 @@ import api from "../../services/api";
 import { whichIconShouldIUSeForMainCard } from "../../utils/whichIconShouldIUse";
 import { LocationType } from "../../models/weather.model";
 import { WeatherCard } from "../../components/WeatherCard";
-
+import { LayoutContainer } from "../../global/layout/styles";
+import { LoadingWrapper } from "../../components/LoadingWrapper";
 
 function Home() {
   const [locationLatAndLong, setLocationLatAndLong] = useState(null);
@@ -74,28 +75,32 @@ function Home() {
   }, [locationLatAndLong]);
 
   return (
-    <HomeUI.Container>
-      <HomeUI.Header>
-        <HomeUI.Greetings>Olá David Lucas, 🤞</HomeUI.Greetings>
-        <HomeUI.ProfileImage
-          source={{ uri: "https://github.com/thereallucas98.png" }}
-        />
-      </HomeUI.Header>
+    <LayoutContainer>
+      <HomeUI.Container>
+        <HomeUI.Header>
+          <HomeUI.Greetings>Olá David Lucas, 🤞</HomeUI.Greetings>
+          <HomeUI.ProfileImage
+            source={{ uri: "https://github.com/thereallucas98.png" }}
+          />
+        </HomeUI.Header>
 
-      <HomeUI.SearchWrapper>
-        <HomeUI.SearchIcon name="search" size={32} color="#FFF" />
-        <HomeUI.SearchInput
-          placeholder="Busque por uma cidade"
-          placeholderTextColor="#FFF"
-        />
-      </HomeUI.SearchWrapper>
+        <HomeUI.SearchWrapper>
+          <HomeUI.SearchIcon name="search" size={32} color="#FFF" />
+          <HomeUI.SearchInput
+            placeholder="Busque por uma cidade"
+            placeholderTextColor="#FFF"
+          />
+        </HomeUI.SearchWrapper>
 
-      {loading ? (
-        <ActivityIndicator size={32} />
-      ) : (
-        <WeatherCard data={locationDefaults} />
-      )}
-    </HomeUI.Container>
+        {loading ? (
+          <LoadingWrapper />
+        ) : (
+          <>
+          <WeatherCard data={locationDefaults} />
+          </>
+        )}
+      </HomeUI.Container>
+    </LayoutContainer>
   );
 }
 

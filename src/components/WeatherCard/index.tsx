@@ -1,7 +1,6 @@
 import { LocationType } from "../../models/weather.model";
-import * as WeatherCardUI from "./styles";
-
 import { formatTimestampToHour } from "../../utils/formatTimestampToHour";
+import * as WeatherCardUI from "./styles";
 
 interface WeatherCardProps {
   data: LocationType;
