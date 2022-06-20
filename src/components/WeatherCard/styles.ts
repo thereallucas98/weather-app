@@ -27,7 +27,10 @@ const WeatherCardWrapper = styled.View`
   justify-content: space-around;
 `;
 
-const WeatherImageContent = styled.View``;
+const WeatherImageContent = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
 
 const WeatherImageStatus = styled(MaterialCommunityIcons)``;
 

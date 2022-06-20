@@ -27,7 +27,7 @@ function TemperatureCard({ data }: TemperatureCardProps) {
             color="#FFF"
             size={20}
           />
-          <InfoDetailCardValue>{data.temp_max}</InfoDetailCardValue>
+          <InfoDetailCardValue>{data.temp_max}°C</InfoDetailCardValue>
         </InfoDetailContentBox>
       </InfoDetailCard>
       <InfoDetailCard>
@@ -38,7 +38,7 @@ function TemperatureCard({ data }: TemperatureCardProps) {
             color="#FFF"
             size={20}
           />
-          <InfoDetailCardValue>{data.temp_min}</InfoDetailCardValue>
+          <InfoDetailCardValue>{data.temp_min}°C</InfoDetailCardValue>
         </InfoDetailContentBox>
       </InfoDetailCard>
     </InfoDetailsWrapper>

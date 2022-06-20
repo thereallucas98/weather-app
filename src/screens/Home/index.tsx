@@ -10,11 +10,23 @@ import { WeatherCard } from "../../components/WeatherCard";
 import { LayoutContainer } from "../../global/layout/styles";
 import { LoadingWrapper } from "../../components/LoadingWrapper";
 
+interface LocationPhoneType {
+  coords: {
+    accuracy: number;
+    altitude: number;
+    altitudeAccuracy: number;
+    heading: number;
+    latitude: number;
+    longitude: number;
+    speed: number;
+  };
+}
+
 function Home() {
   const navigation = useNavigation();
 
   const [cityToSearch, setCityToSearch] = useState("");
-  const [locationLatAndLong, setLocationLatAndLong] = useState(null);
+  const [locationLatAndLong, setLocationLatAndLong] = useState<LocationPhoneType>({} as LocationPhoneType);
   const [locationDefaults, setLocationDefaults] = useState<LocationType>(
     {} as LocationType
   );
@@ -32,17 +44,20 @@ function Home() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
+
+      console.log(location);
+
       setLocationLatAndLong(location);
     })();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("location", locationLatAndLong);
-
       const response = await api.get(
         `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
       );
+
+      console.log(response.data.weather[0].icon);
 
       const formatedData: LocationType = {
         main: {

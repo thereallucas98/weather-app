@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { WeatherCard } from "../../components/WeatherCard";
+import { DetailWeatherCard } from "../../components/DetailWeatherCard";
 import { LocationType } from "../../models/weather.model";
 import * as WeatherInDetailUI from "./styles";
 
@@ -40,7 +40,7 @@ function WeatherInDetail() {
       </WeatherInDetailUI.Header>
 
       <WeatherInDetailUI.WeatherDetailContent>
-        <WeatherCard data={location} isShowingAtHome={false} />
+        <DetailWeatherCard data={location} />
       </WeatherInDetailUI.WeatherDetailContent>
     </WeatherInDetailUI.Container>
   );
