@@ -24,6 +24,19 @@ function WeatherCard({ data }: WeatherCardProps) {
       />
       <TemperatureCard data={data.main} />
       <WindSunCard data={data.wind} sunRise={sunRise} sunSet={sunSet} />
+
+      <WeatherCardUI.FooterButtons>
+        <WeatherCardUI.ShowDetailWeatherButton>
+          <WeatherCardUI.ShowDetailWeatherButtonText>Ver mais detalhes</WeatherCardUI.ShowDetailWeatherButtonText>
+        </WeatherCardUI.ShowDetailWeatherButton>
+        <WeatherCardUI.FavoriteWeatherLocationButton>
+          <WeatherCardUI.IconFavoriteWeather 
+            name="favorite-border"
+            size={24}
+            color="#FFFF"
+          />
+        </WeatherCardUI.FavoriteWeatherLocationButton>
+      </WeatherCardUI.FooterButtons>
     </WeatherCardUI.Container>
   );
 }

@@ -37,83 +37,36 @@ const ProfileImage = styled.Image.attrs({
 
 const SearchWrapper = styled.View`
   width: 100%;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.background_light};
-  padding: 10px;
   border-radius: 8px;
   margin-top: 8px;
   margin-bottom: 12px;
   flex-direction: row;
 `;
 
-const SearchIcon = styled(Feather)``;
-
 const SearchInput = styled.TextInput`
-  width: 90%;
-  height: 42px;
-  padding: 10px;
+  flex: 1;
+  padding: 0 12px;
+
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(14)}px;
+  `;
+
+const InputButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7
+})`
+  background-color: ${({ theme }) => theme.colors.success};
+  padding: 16px;
+  opacity: ${({ disabled }) => disabled ? 0.5 : 1};
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
 
-const WeatherCardWrapper = styled.View`
-  width: 100%;
-  height: 200px;
-
-  padding: 32px;
-  margin-top: 32px;
-
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors.primary};
-
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-
-const WeatherImageContent = styled.View``;
-
-const WeatherImageStatus = styled(MaterialCommunityIcons)``;
-
-const WeatherImageDescription = styled.Text`
-  font-size: ${RFValue(16)}px;
-  font-family: "Roboto_700Bold";
-  color: ${({ theme }) => theme.colors.shape};
-  text-align: center;
-`;
-
-const WeatherLocationContent = styled.View``;
-
-const TemperatureValue = styled.Text`
-  font-size: ${RFValue(42)}px;
-  font-family: "Roboto_700Bold";
-  color: ${({ theme }) => theme.colors.shape};
-`;
-
-const LocationLabelWrapper = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const LocationIcon = styled(MaterialIcons)``;
-
-const LocationCity = styled.Text`
-  font-size: ${RFValue(14)}px;
-  font-family: "Roboto_700Bold";
-  color: ${({ theme }) => theme.colors.shape};
-  text-align: right;
-`;
-
-const LocationCountry = styled.Text`
-  margin-left: 1px;
-  font-size: ${RFValue(14)}px;
-  font-family: "Roboto_400Regular";
-  color: ${({ theme }) => theme.colors.shape};
-`;
+const SearchIcon = styled(Feather)``;
 
 export {
   Container,
@@ -121,16 +74,7 @@ export {
   Greetings,
   ProfileImage,
   SearchWrapper,
-  SearchIcon,
   SearchInput,
-  WeatherCardWrapper,
-  WeatherImageContent,
-  WeatherImageStatus,
-  WeatherImageDescription,
-  WeatherLocationContent,
-  TemperatureValue,
-  LocationIcon,
-  LocationLabelWrapper,
-  LocationCity,
-  LocationCountry,
+  InputButton,
+  SearchIcon,
 };

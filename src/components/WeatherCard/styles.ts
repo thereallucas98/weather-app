@@ -4,6 +4,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
@@ -23,7 +24,7 @@ const WeatherCardWrapper = styled.View`
 
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const WeatherImageContent = styled.View``;
@@ -113,6 +114,44 @@ const InfoDetailCardValue = styled.Text`
   text-align: center;
 `;
 
+const FooterButtons = styled.View`
+  margin-top: 12px;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ShowDetailWeatherButton = styled(TouchableOpacity)`
+  height: 62px;
+  flex: 1;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.success};
+
+  align-items: center;
+  justify-content: center;
+`;
+
+const ShowDetailWeatherButtonText = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-family: "Roboto_700Bold";
+  color: ${({ theme }) => theme.colors.shape};
+`;
+
+const FavoriteWeatherLocationButton = styled(TouchableOpacity)`
+  height: 62px;
+  width: 72px;
+  border-radius: 8px;
+  margin-left: 4px;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${({ theme }) => theme.colors.attention};
+`;
+
+const IconFavoriteWeather = styled(MaterialIcons)``;
+
 export {
   Container,
   WeatherCardWrapper,
@@ -133,4 +172,9 @@ export {
   InfoDetailCardTitle,
   InfoDetailContentBox,
   InfoDetailCardValue,
+  FooterButtons,
+  ShowDetailWeatherButton,
+  ShowDetailWeatherButtonText,
+  FavoriteWeatherLocationButton,
+  IconFavoriteWeather,
 };
