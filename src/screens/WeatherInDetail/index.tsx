@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { FlatList } from "react-native";
+import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { DetailWeatherCard } from "../../components/DetailWeatherCard";
@@ -13,8 +16,11 @@ import {
   WeatherType,
 } from "../../models/weather.model";
 import * as WeatherInDetailUI from "./styles";
-import { FlatList } from "react-native";
 import { Forecast } from "../../components/Forecast";
+import {
+  addWeatherLocationToFavorite,
+  removeWeatherLocationFromFavorite,
+} from "../../redux/Weathers";
 
 interface Params {
   location: LocationType;
@@ -31,17 +37,46 @@ function WeatherInDetail() {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const favorites = useSelector((state: RootState) => state.weathers.items);
+
   const { location } = route.params as Params;
 
   const [nextDaysWeather, setNextDayWeather] = useState<LocationItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [isMyFavorite, setIsMyFavorite] = useState(false);
+
+  const dispatch = useDispatch();
+
   function handleGoBack() {
     navigation.goBack();
   }
 
+  const handleAddToFavorite = useCallback(
+    (data: LocationType) => {
+      dispatch(addWeatherLocationToFavorite(data));
+      setIsMyFavorite(true);
+    },
+    [dispatch]
+  );
+
+  const handleRemoveFromFavorite = useCallback(
+    (data: LocationType) => {
+      dispatch(removeWeatherLocationFromFavorite(data));
+      setIsMyFavorite(false);
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     const fetchData = async () => {
+      if (favorites) {
+        const isFavorited = favorites.find(
+          (item) => item.name === location.name
+        );
+        setIsMyFavorite(!!isFavorited);
+      }
+
       const response = await api.get(
         `forecast?q=${location.name}&appid=44cf0b9843f62148e4956ee57035404b&units=metric&lang=pt_br`
       );
@@ -88,13 +123,27 @@ function WeatherInDetail() {
             <WeatherInDetailUI.LocationTitle>
               {location.name}
             </WeatherInDetailUI.LocationTitle>
-            <WeatherInDetailUI.FavoriteWeatherLocationButton>
-              <WeatherInDetailUI.IconFavoriteWeather
-                name="favorite-border"
-                size={32}
-                color="#FFF"
-              />
-            </WeatherInDetailUI.FavoriteWeatherLocationButton>
+            {isMyFavorite ? (
+              <WeatherInDetailUI.FavoriteWeatherLocationButton
+                onPress={() => handleRemoveFromFavorite(location)}
+              >
+                <WeatherInDetailUI.IconFavoriteWeather
+                  name="favorite"
+                  size={32}
+                  color="#FFFF"
+                />
+              </WeatherInDetailUI.FavoriteWeatherLocationButton>
+            ) : (
+              <WeatherInDetailUI.FavoriteWeatherLocationButton
+                onPress={() => handleAddToFavorite(location)}
+              >
+                <WeatherInDetailUI.IconFavoriteWeather
+                  name="favorite-border"
+                  size={32}
+                  color="#FFFF"
+                />
+              </WeatherInDetailUI.FavoriteWeatherLocationButton>
+            )}
           </WeatherInDetailUI.Header>
 
           <WeatherInDetailUI.WeatherDetailContent>
