@@ -1,7 +1,10 @@
-import { StatusBar } from "react-native";
-import AppLoading from "expo-app-loading";
 import React from "react";
+import AppLoading from "expo-app-loading";
+import { StatusBar } from "react-native";
+import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+
+import { store } from "./src/redux/store";
 import theme from "./src/global/styles/theme";
 import StackRoutes from "./src/routes/stack.routes";
 
@@ -25,12 +28,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
-      <StackRoutes />
+      <Provider store={store}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        <StackRoutes />
+      </Provider>
     </ThemeProvider>
   );
 }
