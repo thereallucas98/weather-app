@@ -1,4 +1,3 @@
-
 export interface WeatherParamsType {
   feels_like: number;
   humidity: number;
@@ -15,7 +14,7 @@ interface WeatherDate {
   type: number;
 }
 
-interface WeatherType {
+export interface WeatherType {
   description: string;
   icon: string;
   id: number;
@@ -27,7 +26,7 @@ export interface WeatherWindType {
   speed: number;
 }
 
-interface WeatherIconType {
+export interface WeatherIconType {
   name: string;
   label: string;
 }

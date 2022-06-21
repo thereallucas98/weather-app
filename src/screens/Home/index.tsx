@@ -26,7 +26,8 @@ function Home() {
   const navigation = useNavigation();
 
   const [cityToSearch, setCityToSearch] = useState("");
-  const [locationLatAndLong, setLocationLatAndLong] = useState<LocationPhoneType>({} as LocationPhoneType);
+  const [locationLatAndLong, setLocationLatAndLong] =
+    useState<LocationPhoneType>({} as LocationPhoneType);
   const [locationDefaults, setLocationDefaults] = useState<LocationType>(
     {} as LocationType
   );
@@ -45,8 +46,6 @@ function Home() {
 
       let location = await Location.getCurrentPositionAsync({});
 
-      console.log(location);
-
       setLocationLatAndLong(location);
     })();
   }, []);
@@ -56,8 +55,6 @@ function Home() {
       const response = await api.get(
         `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
       );
-
-      console.log(response.data.weather[0].icon);
 
       const formatedData: LocationType = {
         main: {

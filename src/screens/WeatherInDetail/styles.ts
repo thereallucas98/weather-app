@@ -41,6 +41,14 @@ const FavoriteWeatherLocationButton = styled(goBackButton)``;
 
 const IconFavoriteWeather = styled(MaterialIcons)``;
 
+const NextDays = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-family: "Roboto_700Bold";
+  color: ${({ theme }) => theme.colors.shape};
+
+  margin: 20px auto;
+`;
+
 const WeatherDetailContent = styled.View`
   flex: 1;
   padding: 10px;
@@ -54,5 +62,6 @@ export {
   LocationTitle,
   FavoriteWeatherLocationButton,
   IconFavoriteWeather,
+  NextDays,
   WeatherDetailContent,
 };

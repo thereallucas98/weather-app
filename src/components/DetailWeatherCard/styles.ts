@@ -1,16 +1,11 @@
 import {
-  Feather,
   FontAwesome5,
   MaterialCommunityIcons,
-  MaterialIcons,
 } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-const Container = styled.View`
-  flex: 1;
-`;
+const Container = styled.View``;
 
 const WeatherCardWrapper = styled.View`
   width: 100%;
