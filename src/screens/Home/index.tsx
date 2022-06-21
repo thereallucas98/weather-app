@@ -9,6 +9,7 @@ import { LocationType } from "../../models/weather.model";
 import { WeatherCard } from "../../components/WeatherCard";
 import { LayoutContainer } from "../../global/layout/styles";
 import { LoadingWrapper } from "../../components/LoadingWrapper";
+import { Keyboard } from "react-native";
 
 interface LocationPhoneType {
   coords: {
@@ -33,8 +34,6 @@ function Home() {
   );
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const [showResetButton, setShowResetButton] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -87,7 +86,6 @@ function Home() {
   async function handleResetLocation() {
     setLoading(true);
     setCityToSearch("");
-    setShowResetButton(false);
 
     const response = await api.get(
       `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
@@ -150,10 +148,12 @@ function Home() {
 
     setLocationDefaults(formatedData);
     setLoading(false);
-    setShowResetButton(true);
+    Keyboard.dismiss();
   }
 
   function handleSeeWeatherDetail() {
+    setCityToSearch("");
+
     navigation.navigate("WeatherInDetail", {
       location: locationDefaults,
     });
@@ -176,15 +176,9 @@ function Home() {
             value={cityToSearch}
             onChangeText={(e) => setCityToSearch(e)}
           />
-          {showResetButton ? (
-            <HomeUI.InputButton onPress={handleResetLocation}>
-              <HomeUI.SearchIcon name="x" size={32} color="#FFF" />
-            </HomeUI.InputButton>
-          ) : (
-            <HomeUI.InputButton onPress={handleSearchCity}>
-              <HomeUI.SearchIcon name="search" size={32} color="#FFF" />
-            </HomeUI.InputButton>
-          )}
+          <HomeUI.InputButton onPress={handleSearchCity}>
+            <HomeUI.SearchIcon name="search" size={32} color="#FFF" />
+          </HomeUI.InputButton>
         </HomeUI.SearchWrapper>
 
         {loading ? (
