@@ -14,15 +14,8 @@ function Favorite() {
 
   const favorites = useSelector((state: RootState) => state.weathers.items);
 
-
-  const [myFavorites, setMyFavorites] = useState(favorites);
-
   function handleDeleteFromFavorite(data: LocationType) {
     dispatch(removeWeatherLocationFromFavorite(data));
-
-    const updatedArray = myFavorites.filter(favorite => favorite.name !== data.name);
-
-    setMyFavorites(updatedArray);
   }
 
   return (
@@ -37,18 +30,25 @@ function Favorite() {
         </FavoriteUI.CloseButton>
       </FavoriteUI.Header>
 
-      <FlatList
-        data={myFavorites}
-        keyExtractor={(item) => String(`${item.name}-${item.country}`)}
-        renderItem={({ item }) => (
-          <FavoriteWeatherCard
-            data={item}
-            onDelete={handleDeleteFromFavorite}
-          />
-        )}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 10, marginTop: 64 }}
-      />
+      {favorites && favorites.length > 0 ? (
+        <FlatList
+          data={favorites}
+          keyExtractor={(item) => String(`${item.name}-${item.country}`)}
+          renderItem={({ item }) => (
+            <FavoriteWeatherCard
+              data={item}
+              onDelete={handleDeleteFromFavorite}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ padding: 10, marginTop: 64 }}
+        />
+      ) : (
+        <FavoriteUI.HasNoFavoritesShow>
+          <FavoriteUI.EmojiIcon>😳</FavoriteUI.EmojiIcon>
+          <FavoriteUI.TextDescription>Você ainda não possui localidades favoritadas</FavoriteUI.TextDescription>
+        </FavoriteUI.HasNoFavoritesShow>
+      )}
     </FavoriteUI.Container>
   );
 }

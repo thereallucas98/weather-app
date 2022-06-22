@@ -41,6 +41,22 @@ const CloseButton = styled(goBackButton)``;
 
 const CloseIcon = styled(MaterialIcons)``;
 
+const HasNoFavoritesShow = styled.View`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EmojiIcon = styled.Text`
+  font-size: ${RFValue(50)}px;
+`;
+
+const TextDescription = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.shape};
+`;
+
 export { 
   Container,
   Header,
@@ -49,4 +65,7 @@ export {
   goBackIcon,
   CloseButton,
   CloseIcon,
+  HasNoFavoritesShow,
+  EmojiIcon,
+  TextDescription,
 };
