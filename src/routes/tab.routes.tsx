@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import theme from '../global/styles/theme';
 
 import { Home } from '../screens/Home';
+import { Favorite } from '../screens/Favorite';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -39,11 +40,11 @@ const TabRoutes = () => {
       />
       <Screen
         name="Favoritos"
-        component={Home}
+        component={Favorite}
         options={{
           tabBarIcon: (({ size, color }) =>
             <MaterialIcons
-              name="favorite-border"
+              name="favorite"
               size={size}
               color={color}
             />

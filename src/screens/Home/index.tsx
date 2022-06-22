@@ -149,6 +149,7 @@ function Home() {
 
     setLocationDefaults(formatedData);
     setLoading(false);
+    setCityToSearch("");
     Keyboard.dismiss();
   }
 
