@@ -9,7 +9,7 @@ import { LocationType } from "../../models/weather.model";
 import { WeatherCard } from "../../components/WeatherCard";
 import { LayoutContainer } from "../../global/layout/styles";
 import { LoadingWrapper } from "../../components/LoadingWrapper";
-import { Keyboard } from "react-native";
+import { Alert, Keyboard } from "react-native";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
@@ -39,7 +39,6 @@ function Home() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -55,75 +54,105 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get(
-        `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
-      );
+    if (
+      locationLatAndLong &&
+      locationLatAndLong.coords &&
+      locationLatAndLong.coords.latitude
+    ) {
+      const fetchData = async () => {
+        await api
+          .get(
+            `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
+          )
+          .then((response) => {
+            const formatedData: LocationType = {
+              main: {
+                feels_like: Math.floor(response.data.main.feels_like),
+                humidity: response.data.main.humidity,
+                pressure: response.data.main.pressure,
+                temp: Math.floor(response.data.main.temp),
+                temp_max: Math.floor(response.data.main.temp_max),
+                temp_min: Math.floor(response.data.main.temp_min),
+              },
+              name: response.data.name,
+              country: response.data.sys.country,
+              units: {
+                id: response.data.sys.id,
+                sunrise: response.data.sys.sunrise,
+                sunset: response.data.sys.sunset,
+                type: response.data.sys.type,
+              },
+              weather: response.data.weather,
+              wind: response.data.wind,
+              icon: whichIconShouldIUSeForMainCard(
+                response.data.weather[0].icon
+              ),
+            };
 
-      const formatedData: LocationType = {
-        main: {
-          feels_like: Math.floor(response.data.main.feels_like),
-          humidity: response.data.main.humidity,
-          pressure: response.data.main.pressure,
-          temp: Math.floor(response.data.main.temp),
-          temp_max: Math.floor(response.data.main.temp_max),
-          temp_min: Math.floor(response.data.main.temp_min),
-        },
-        name: response.data.name,
-        country: response.data.sys.country,
-        units: {
-          id: response.data.sys.id,
-          sunrise: response.data.sys.sunrise,
-          sunset: response.data.sys.sunset,
-          type: response.data.sys.type,
-        },
-        weather: response.data.weather,
-        wind: response.data.wind,
-        icon: whichIconShouldIUSeForMainCard(response.data.weather[0].icon),
+            setLocationDefaults(formatedData);
+            setLoading(false);
+          })
+          .catch((e) => {
+            Alert.alert(
+              "Erro",
+              "Um erro ocorreu, por favor entrar em contato com o suporte"
+            );
+          });
       };
-
-      setLocationDefaults(formatedData);
-      setLoading(false);
-    };
-    fetchData();
+      fetchData();
+    }
 
     return () => {
       handleResetLocation();
-    }
+    };
   }, [locationLatAndLong]);
 
   async function handleResetLocation() {
     setLoading(true);
     setCityToSearch("");
 
-    const response = await api.get(
-      `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
-    );
+    if (
+      locationLatAndLong &&
+      locationLatAndLong.coords &&
+      locationLatAndLong.coords.latitude
+    ) {
+      await api
+        .get(
+          `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
+        )
+        .then((response) => {
+          const formatedData: LocationType = {
+            main: {
+              feels_like: Math.floor(response.data.main.feels_like),
+              humidity: response.data.main.humidity,
+              pressure: response.data.main.pressure,
+              temp: Math.floor(response.data.main.temp),
+              temp_max: Math.floor(response.data.main.temp_max),
+              temp_min: Math.floor(response.data.main.temp_min),
+            },
+            name: response.data.name,
+            country: response.data.sys.country,
+            units: {
+              id: response.data.sys.id,
+              sunrise: response.data.sys.sunrise,
+              sunset: response.data.sys.sunset,
+              type: response.data.sys.type,
+            },
+            weather: response.data.weather,
+            wind: response.data.wind,
+            icon: whichIconShouldIUSeForMainCard(response.data.weather[0].icon),
+          };
 
-    const formatedData: LocationType = {
-      main: {
-        feels_like: Math.floor(response.data.main.feels_like),
-        humidity: response.data.main.humidity,
-        pressure: response.data.main.pressure,
-        temp: Math.floor(response.data.main.temp),
-        temp_max: Math.floor(response.data.main.temp_max),
-        temp_min: Math.floor(response.data.main.temp_min),
-      },
-      name: response.data.name,
-      country: response.data.sys.country,
-      units: {
-        id: response.data.sys.id,
-        sunrise: response.data.sys.sunrise,
-        sunset: response.data.sys.sunset,
-        type: response.data.sys.type,
-      },
-      weather: response.data.weather,
-      wind: response.data.wind,
-      icon: whichIconShouldIUSeForMainCard(response.data.weather[0].icon),
-    };
-
-    setLocationDefaults(formatedData);
-    setLoading(false);
+          setLocationDefaults(formatedData);
+          setLoading(false);
+        })
+        .catch((e) => {
+          Alert.alert(
+            "Erro",
+            "Um erro ocorreu, por favor entrar em contato com o suporte"
+          );
+        });
+    }
   }
 
   async function handleSearchCity() {
@@ -174,9 +203,7 @@ function Home() {
       <HomeUI.Container>
         <HomeUI.Header>
           <HomeUI.Greetings>Olá {user.name}, 🤞</HomeUI.Greetings>
-          <HomeUI.ProfileImage
-            source={{ uri: user.image_url }}
-          />
+          <HomeUI.ProfileImage source={{ uri: user.image_url }} />
         </HomeUI.Header>
 
         <HomeUI.SearchWrapper>
