@@ -22,6 +22,12 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 - Você possuir o Expo instalando em sua máquina
 - Você possuir o yarn instalando em sua máquina
 
+## 💻 Tecnologias
+- Expo
+- React Native
+- Redux Tollkit
+- Styled Components
+
 ## 🚀 Instalando `Weather App`
 
 Para instalar o App, siga estas etapas:
