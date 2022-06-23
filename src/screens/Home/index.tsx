@@ -10,6 +10,8 @@ import { WeatherCard } from "../../components/WeatherCard";
 import { LayoutContainer } from "../../global/layout/styles";
 import { LoadingWrapper } from "../../components/LoadingWrapper";
 import { Keyboard } from "react-native";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 interface LocationPhoneType {
   coords: {
@@ -25,6 +27,8 @@ interface LocationPhoneType {
 
 function Home() {
   const navigation = useNavigation();
+
+  const user = useSelector((state: RootState) => state.user.data);
 
   const [cityToSearch, setCityToSearch] = useState("");
   const [locationLatAndLong, setLocationLatAndLong] =
@@ -51,6 +55,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    console.log("Cheguei");
     const fetchData = async () => {
       const response = await api.get(
         `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`
@@ -82,6 +87,10 @@ function Home() {
       setLoading(false);
     };
     fetchData();
+
+    return () => {
+      handleResetLocation();
+    }
   }, [locationLatAndLong]);
 
   async function handleResetLocation() {
@@ -165,9 +174,9 @@ function Home() {
     <LayoutContainer>
       <HomeUI.Container>
         <HomeUI.Header>
-          <HomeUI.Greetings>Olá David Lucas, 🤞</HomeUI.Greetings>
+          <HomeUI.Greetings>Olá {user.name}, 🤞</HomeUI.Greetings>
           <HomeUI.ProfileImage
-            source={{ uri: "https://github.com/thereallucas98.png" }}
+            source={{ uri: user.image_url }}
           />
         </HomeUI.Header>
 

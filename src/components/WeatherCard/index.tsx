@@ -58,7 +58,7 @@ function WeatherCard({
       const isFavorited = favorites.find((item) => item.name === data.name);
       setIsMyFavorite(!!isFavorited);
     }
-  }, [data]);
+  }, [data, favorites]);
 
   return (
     <WeatherCardUI.Container>
