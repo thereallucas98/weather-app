@@ -24,6 +24,7 @@ const TabRoutes = () => {
         tabBarActiveBackgroundColor: theme.colors.background,
         tabBarInactiveBackgroundColor: theme.colors.background_light,
       }}
+      initialRouteName="Home"
     >
       <Screen
         name="Home"

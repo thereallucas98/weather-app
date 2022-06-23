@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabRoutes from "./tab.routes";
 
 import { WeatherInDetail } from "../screens/WeatherInDetail";
+import { LoginWithoutAuth } from "../screens/LoginWithoutAuth";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -13,9 +14,10 @@ const StackRoutes = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Navigator screenOptions={{ headerShown: false }}>
-          <Screen name="Dashboard" component={TabRoutes} />
+        <Navigator screenOptions={{ headerShown: false }} initialRouteName="LoginWithouAuth">
+          <Screen name="Dashboard" component={TabRoutes} options={{ gestureEnabled: false}} />
           <Screen name="WeatherInDetail" component={WeatherInDetail} />
+          <Screen name="LoginWithouAuth" component={LoginWithoutAuth} />
         </Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
