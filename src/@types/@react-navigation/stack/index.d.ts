@@ -5,5 +5,6 @@ declare namespace ReactNavigation {
     Favorite: NavigationStackProp<string>;
     LoginWithoutAuth: NavigationStackProp<string>;
     Dashboard: NavigationStackProp<string>;
+    SettingsUser: NavigationStackProp<string>;
   }
 }

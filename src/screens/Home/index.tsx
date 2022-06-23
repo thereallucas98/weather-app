@@ -55,7 +55,6 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log("Cheguei");
     const fetchData = async () => {
       const response = await api.get(
         `weather?lat=${locationLatAndLong.coords.latitude}&lon=${locationLatAndLong.coords.longitude}&appid=58818988a4c0b998104b5698523f35d2&units=metric&lang=pt_br`

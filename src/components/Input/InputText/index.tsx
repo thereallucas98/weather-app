@@ -6,14 +6,15 @@ import { Container, IconContainer, InputTextComponent } from "./styles";
 
 interface InputProps extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>["name"];
+  previousValue?: string;
   value?: string;
 }
 
-export function InputText({ iconName, value, ...rest }: InputProps) {
+export function InputText({ iconName, value, previousValue, ...rest }: InputProps) {
   const theme = useTheme();
 
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFilled, setIsFilled] = useState(!!previousValue);
 
   function handleInputFocus() {
     setIsFocused(true);

@@ -6,6 +6,7 @@ import theme from '../global/styles/theme';
 
 import { Home } from '../screens/Home';
 import { Favorite } from '../screens/Favorite';
+import { SettingsUser } from '../screens/Settings';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -54,7 +55,7 @@ const TabRoutes = () => {
       />
       <Screen
         name="Settings"
-        component={Home}
+        component={SettingsUser}
         options={{
           tabBarIcon: (({ size, color }) =>
             <MaterialIcons
