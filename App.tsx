@@ -1,6 +1,5 @@
-import React from "react";
-import AppLoading from "expo-app-loading";
-import { StatusBar } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { StatusBar, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
@@ -9,25 +8,49 @@ import theme from "./src/global/styles/theme";
 import StackRoutes from "./src/routes/stack.routes";
 
 import {
-  useFonts,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 
-export default function App() {
-  const [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
-  });
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await Font.loadAsync({
+          Roboto_400Regular,
+          Roboto_500Medium,
+          Roboto_700Bold,
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <View onLayout={onLayoutRootView} style={{ flex: 1}}>
+      <ThemeProvider theme={theme}>
       <Provider store={store}>
         <StatusBar
           barStyle="light-content"
@@ -37,5 +60,6 @@ export default function App() {
         <StackRoutes />
       </Provider>
     </ThemeProvider>
+    </View>
   );
 }
