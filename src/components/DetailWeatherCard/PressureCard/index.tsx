@@ -14,7 +14,7 @@ function PressureCard({ data }: PressureCardProps) {
   return (
     <InfoDetailsWrapper>
       <InfoDetailCard>
-        <InfoDetailCardTitle>Humildade</InfoDetailCardTitle>
+        <InfoDetailCardTitle>Umidade</InfoDetailCardTitle>
         <InfoDetailCardValue>{data.humidity}%</InfoDetailCardValue>
       </InfoDetailCard>
       <InfoDetailCard>

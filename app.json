@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "weather-app",
+    "name": "Weather App",
     "slug": "weather-app",
+    "icon": "./assets/icons/logo.png",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
@@ -9,6 +10,14 @@
     "splash": {
       "image": "./assets/splash.png",
       "backgroundColor": "#121015"
+    },
+    "ios": {
+      "bundleIdentifier": "com.weatherapp",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.weatherapp",
+      "versionCode": 1
     }
   }
 }

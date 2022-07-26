@@ -20,14 +20,14 @@ function TemperatureCard({ data }: TemperatureCardProps) {
         <TemperatureValue>{data.temp}°C</TemperatureValue>
       </TemperatureBlock>
       <TemperatureBlock>
-        <TemperatureLabel>Temp. Máxima</TemperatureLabel>
+        <TemperatureLabel>Temp. Mínima</TemperatureLabel>
         <TemperatureContent>
           <InfoDetailCardFontAwesomeIcon
             name="temperature-high"
             size={24}
             color="#FFF"
           />
-          <TemperatureValue>{data.temp_max}°C</TemperatureValue>
+          <TemperatureValue>{data.temp_min}°C</TemperatureValue>
         </TemperatureContent>
       </TemperatureBlock>
       <TemperatureBlock>
